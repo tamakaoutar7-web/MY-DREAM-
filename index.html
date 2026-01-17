@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <header>
+
+  <h1 id="title">🌟 MY DREAM</h1>
+
+  <p id="description">موقع للفيديوهات والموسيقى</p>
+
+  <nav>
+
+    <button onclick="setLanguage('ar')">العربية</button>
+
+    <button onclick="setLanguage('en')">English</button>
+
+    <button onclick="setLanguage('es')">Español</button>
+
+  </nav>
+
+</header>
+
+<main>
+
+  <section>
+
+    <h2 id="musicTitle">🎵 موسيقى</h2>
+
+  </section>
+
+  <section>
+
+    <h2 id="videoTitle">🎬 فيديو</h2>
+
+  </section>
+
+  <section>
+
+    <h2 id="chatTitle">💬 دردشة</h2>
+
+    <input id="inputMessage" placeholder="اكتب رسالة..." />
+
+    <button onclick="sendMessage()" id="sendBtn">إرسال</button>
+
+    <ul id="messages"></ul>
+
+  </section>
+
+</main>
+
+<script>
+
+const now = new Date();
+
+const hour = now.getHours();
+
+if (hour < 9 || hour >= 19) {
+
+  alert("❌ هذا الموقع متاح للأطفال فقط من 9 صباحًا إلى 7 مساءً");
+
+  document.body.innerHTML = "";
+
+}
+
+</script><div data-kids="true">
+
+  🎵 موسيقى أطفال
+
+</div>
+
+<div data-kids="false">
+
+  ❌ محتوى غير مخصص
+
+</div><h3>تسجيل طفل</h3>
+
+<input type="number" id="age" placeholder="العمر">
+
+<input type="email" id="parentEmail" placeholder="إيميل أحد الوالدين">
+
+<button onclick="register()">تسجيل</button><button onclick="forbiddenContent()">محتوى غير لائق</button><script>
+
+function forbiddenContent() {
+
+  alert("⚠️ تم اكتشاف محتوى غير مناسب للأطفال");
+
+  alert("📩 سيتم إبلاغ الوالدين (محاكاة)");
+
+  document.body.innerHTML = "";
+
+}
+
+</script><script>
+
+const bannedWords = [
+
+  "سب",
+
+  "شتيمة",
+
+  "كلمة_سيئة",
+
+  "جنس",
+
+  "عار",
+
+  "xxx"
+
+];
+
+function checkContent(text) {
+
+  return bannedWords.some(word => text.includes(word));
+
+}
+
+</script><textarea id="post"></textarea>
+
+<button onclick="publish()">نشر</button>
+
+<script>
+
+function publish() {
+
+  const text = document.getElementById("post").value;
+
+  if (checkContent(text)) {
+
+    alert("❌ هذا المحتوى مخالف لقواعد الموقع");
+
+    return;
+
+  }
+
+  alert("✅ تم نشر المحتوى");
+
+}
+
+</script><!-- لا يوجد input type="file" -->
+
+<input type="text" placeholder="اكتب رسالتك فقط"><input type="file" accept="image/png, image/jpeg" disabled><button onclick="setMode('kids')">وضع الأطفال</button>
+
+<button onclick="setMode('adult')">وضع الكبار</button>
+
+<script>
+
+function setMode(mode) {
+
+  if (mode === "kids") {
+
+    document.body.classList.add("kids");
+
+  } else {
+
+    document.body.classList.add("adult");
+
+  }
+
+}
+
+</script><p>
+
+🔒 نحن لا نحفظ رسائلك  
+
+🔒 لا نحتفظ بالصور  
+
+🔒 لا نتجسس على المحادثات  
+
+🔒 كل شيء يحدث داخل جهازك فقط
+
+</p><h2>🎧 اختر نشاطك</h2>
+
+<button onclick="setMode('walk')">🚶 مشي</button>
+
+<button onclick="setMode('run')">🏃 جري</button>
+
+<hr>
+
+<h3 id="title">اختر أغنية</h3>
+
+<div id="songs"></div>
+
+<audio id="player" controls></audio><script>
+
+const walkSongs = [
+
+  { name: "مشي هادئ", file: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
+
+  { name: "صباح جميل", file: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" }
+
+];
+
+const runSongs = [
+
+  { name: "طاقة الجري", file: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" },
+
+  { name: "قوة وحماس", file: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" }
+
+];
+
+const songsDiv = document.getElementById("songs");
+
+const player = document.getElementById("player");
+
+const title = document.getElementById("title");
+
+function setMode(mode) {
+
+  songsDiv.innerHTML = "";
+
+  title.textContent = mode === "walk" ? "🚶 أغاني المشي" : "🏃 أغاني الجري";
+
+  const list = mode === "walk" ? walkSongs : runSongs;
+
+  list.forEach(song => {
+
+    const btn = document.createElement("button");
+
+    btn.textContent = "▶️ " + song.name;
+
+    btn.onclick = () => {
+
+      player.src = song.file;
+
+      player.play();
+
+    };
+
+    songsDiv.appendChild(btn);
+
+  });
+
+}
+
+<img 
+
+  src="ضعي_هنا_رابط_الصورة_المباشر"
+
+  alt="My Dream"
+
+  style="width:100%; border-radius:20px;"
+
+<img 
+
+  src="https://i.ibb.co/xSzsy8HZ/file-000000001ecc71f48abcdef.file-000000001ecc71f48abcdef123456.png"
+
+  alt="My Dream"
+
+  style="width:100%; border-radius:20px;"
+
+>></script><header class="hero">
+
+  <h1><div id="songs"></div>
+
+<audio id="player" controls></audio>
+
+<header class="hero">
+
+  <h1>MY DREAM</h1>
+
+  <img 
+
+    src="https://i.ibb.co/xSzsy8HZ/file-000000001ecc71f48 abcdef123456.png"
+
+    alt="My Dream"
+
+    style="width:100%; border-radius:20px;"
+
+  >
+
+</header>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>

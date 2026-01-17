@@ -36,7 +36,8 @@ const translations = {
 
     placeholder: "Type a message..."
 
-  },
+  },<link rel="stylesheet" href="style.css">
+
 
   es: {
 
